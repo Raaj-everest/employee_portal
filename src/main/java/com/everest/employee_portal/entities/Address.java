@@ -1,20 +1,42 @@
-package com.everest.employee_portal.model;
+package com.everest.employee_portal.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import javax.persistence.*;
+
+@Getter
+@Setter
 @AllArgsConstructor
+@Entity
+@Table(name = "address")
 public class Address {
+    @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
+    @Column(name = "street")
     private String streetDetails;
+
+    @Column(name = "house_number")
     private String houseNumber;
+
+    @Column
     private String district;
+
+    @Column
     private String city;
+
+    @Column
     private String state;
+
+    @Column
     private String country;
-    private String zipCode;
+
+    @Column
+    private Long zipCode;
 
 
     public Address() {
@@ -24,16 +46,7 @@ public class Address {
         city = "";
         state = "";
         country = "";
-        zipCode = "";
-    }
-
-    public boolean equals(Address right) {
-        return houseNumber.equals(right.houseNumber)
-                && streetDetails.equals(right.streetDetails)
-                && city.equals(right.city)
-                && state.equals(right.state)
-                && country.equals(right.country)
-                && zipCode.equals(right.zipCode);
+        zipCode = 0L;
     }
 
     @Override
@@ -48,6 +61,7 @@ public class Address {
                 ", zipCode='" + zipCode + '\'' +
                 '}';
     }
+
 }
 
 
