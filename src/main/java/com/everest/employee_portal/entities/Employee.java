@@ -22,13 +22,13 @@ public class Employee {
     @JoinColumn(name = "name_id")
     private Name name_id;
 
-    @Column(name = "date_of_join")
+    @Column(name = "date_of_join",nullable = false)
     private LocalDate dateOfJoin;
 
-    @Column
+    @Column(nullable = false)
     private Designation designation;
 
-    @Column(name = "company_mail")
+    @Column(name = "company_mail",nullable = false)
     private String everestEmail;
 
     @OneToOne
@@ -47,6 +47,5 @@ public class Employee {
 
     @Column
     private String bio;
-
 
 }
