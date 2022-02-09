@@ -18,9 +18,14 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne
-    @JoinColumn(name = "name_id")
-    private Name name_id;
+    @Column(name = "first_name",nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name",nullable = false)
+    private String lastName;
+
+    @Column(name = "middle_name",nullable = false)
+    private String middleName;
 
     @Column(name = "date_of_join",nullable = false)
     private LocalDate dateOfJoin;
