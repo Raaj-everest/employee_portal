@@ -45,5 +45,11 @@ public class EmployeeService {
         return employee.getId();
     }
 
-
+    public String delete(Long id) {
+        Employee employee = employeeRepository.getById(id);
+        addressRepository.delete(employee.getPermanentAddress());
+        addressRepository.delete(employee.getPresentAddress());
+        employeeRepository.delete(employee);
+        return "Employee with " + id + "deleted successfully";
+    }
 }

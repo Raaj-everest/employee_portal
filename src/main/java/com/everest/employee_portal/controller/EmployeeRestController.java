@@ -33,8 +33,12 @@ public class EmployeeRestController {
     @PutMapping("/{id}")
     public Long updateEmployee( @PathVariable Long id,@RequestBody Employee employee){
         employee.setId(id);
-        System.out.println(employee.id);
         return  es.update(employee);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteEmployee(@PathVariable Long id){
+        return es.delete(id);
     }
 
 
