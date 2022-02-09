@@ -18,39 +18,40 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "first_name",nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name",nullable = false)
-    private String lastName;
-
-    @Column(name = "middle_name",nullable = false)
+    @Column(name = "middle_name", nullable = false)
     private String middleName;
 
-    @Column(name = "date_of_join",nullable = false)
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
+
+    @Column(name = "date_of_join", nullable = false)
     private LocalDate dateOfJoin;
 
     @Column(nullable = false)
     private Designation designation;
 
-    @Column(name = "company_mail",nullable = false)
+    @Column(name = "company_mail", nullable = false)
     private String everestEmail;
+
+    @Column(name = "personal_mail")
+    private String personalEmail;
+
+    @Column
+    private String bio;
 
     @OneToOne
     @JoinColumn(name = "present_address_id")
     private Address presentAddress;
 
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
-
-    @Column(name = "personal_mail")
-    private String personalEmail;
-
     @OneToOne
     @JoinColumn(name = "permanent_address_id")
     private Address permanentAddress;
 
-    @Column
-    private String bio;
 
 }
