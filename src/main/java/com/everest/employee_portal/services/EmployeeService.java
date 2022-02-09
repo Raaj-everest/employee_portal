@@ -19,4 +19,9 @@ public class EmployeeService {
     }
 
 
+    public Optional<Employee> getByID(Long id){
+        return employeeRepository.findById(id);
+    }
+
+
 }
