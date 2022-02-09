@@ -2,6 +2,7 @@ package com.everest.employee_portal.entities;
 
 import com.everest.employee_portal.entities.enums.Designation;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,9 +15,11 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "employee")
 public class Employee {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    public int id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -45,13 +48,12 @@ public class Employee {
     @Column
     private String bio;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "present_address_id")
     private Address presentAddress;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "permanent_address_id")
     private Address permanentAddress;
-
 
 }

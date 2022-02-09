@@ -1,21 +1,29 @@
 package com.everest.employee_portal.entities;
 
+import com.everest.employee_portal.entities.enums.AddressType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "address")
 public class Address {
+
     @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    public int id;
+
+    @Column(name = "type", nullable = false)
+    private AddressType addressType;
 
     @Column(name = "street")
     private String streetDetails;
@@ -38,27 +46,17 @@ public class Address {
     @Column
     private Long zipCode;
 
-
-    public Address() {
-        streetDetails = "";
-        houseNumber = "";
-        district = "";
-        city = "";
-        state = "";
-        country = "";
-        zipCode = 0L;
-    }
-
     @Override
     public String toString() {
         return "Address{" +
-                "streetDetails='" + streetDetails + '\'' +
-                ", houseNumber='" + houseNumber + '\'' +
-                ", district='" + district + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", country='" + country + '\'' +
-                ", zipCode='" + zipCode + '\'' +
+                "addressType :'" + addressType + '\'' +
+                "streetDetails :'" + streetDetails + '\'' +
+                ", houseNumber :'" + houseNumber + '\'' +
+                ", district :'" + district + '\'' +
+                ", city :'" + city + '\'' +
+                ", state :'" + state + '\'' +
+                ", country :'" + country + '\'' +
+                ", zipCode :'" + zipCode + '\'' +
                 '}';
     }
 
