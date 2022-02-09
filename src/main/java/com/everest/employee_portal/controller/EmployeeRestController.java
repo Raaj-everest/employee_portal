@@ -27,17 +27,14 @@ public class EmployeeRestController {
 
     @PostMapping("")
     public Long createEmployee( @RequestBody Employee employee){
-        System.out.println( employee.getId());
-        System.out.println(employee.getBio());
-        System.out.println( employee.getDateOfBirth());
-        System.out.println(employee.getDateOfJoin());
-        System.out.println(  employee.getFirstName());
-        System.out.println(employee.getEverestEmail());
-        System.out.println( employee.getPersonalEmail());
-        System.out.println(employee.getDesignation());
-        System.out.println(  employee.getPermanentAddress());
-        System.out.println(employee.getPresentAddress());
        return  es.create(employee);
+    }
+
+    @PutMapping("/{id}")
+    public Long updateEmployee( @PathVariable Long id,@RequestBody Employee employee){
+        employee.setId(id);
+        System.out.println(employee.id);
+        return  es.update(employee);
     }
 
 

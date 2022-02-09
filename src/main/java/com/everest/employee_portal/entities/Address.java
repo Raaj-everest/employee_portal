@@ -20,7 +20,7 @@ public class Address {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    public int id;
+    public Long id;
 
     @Column(name = "type", nullable = false)
     private AddressType addressType;

@@ -19,7 +19,7 @@ public class Employee {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
-    public int id;
+    public Long id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
