@@ -1,24 +1,32 @@
 package com.everest.employee_portal.controller;
 
 import com.everest.employee_portal.entities.Employee;
-import com.everest.employee_portal.repositories.EmployeeRepository;
+import com.everest.employee_portal.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("search/")
-public class Search {
+@RequestMapping("api/employees")
+public class EmployeeRestController {
 
-    private final EmployeeRepository ep;
+    private final EmployeeService es;
 
-    @GetMapping("getAll")
+    @GetMapping("")
     public List<Employee> getEmployee() {
-        return ep.findAll();
+        return es.getAll();
     }
+
+    @GetMapping("/{id}")
+    public Optional<Employee> getByID(@PathVariable Long id) {
+        return es.getByID(id);
+    }
+
 
 }
