@@ -66,5 +66,6 @@ public class EmployeeService {
 
     public List<Employee> searchBy(String firstName, String lastName) {
         return employeeRepository.findByFirstNameAndLastName(firstName, lastName);
+
     }
 }

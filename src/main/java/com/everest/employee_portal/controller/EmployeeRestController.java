@@ -1,6 +1,7 @@
 package com.everest.employee_portal.controller;
 
 import com.everest.employee_portal.entities.Employee;
+import com.everest.employee_portal.repositories.EmployeeRepository;
 import com.everest.employee_portal.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,6 @@ public class EmployeeRestController {
     @GetMapping("")
     public ResponseEntity<List<Employee>> getAllEmployees() {
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.getAll());
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Employee>> getEmployeeByID(@PathVariable Long id) {
