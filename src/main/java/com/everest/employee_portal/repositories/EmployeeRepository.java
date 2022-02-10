@@ -12,6 +12,4 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     List<Employee> findByFirstNameAndLastName(String firstName, String lastName);
 
-    List<Employee> findByDateOfJoin(LocalDate dateOfJoin);
-
 }

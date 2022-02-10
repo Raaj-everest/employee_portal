@@ -1,18 +1,12 @@
 package com.everest.employee_portal.entities;
 
 import com.everest.employee_portal.entities.enums.AddressType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "address")
 public class Address {
@@ -45,20 +39,6 @@ public class Address {
 
     @Column
     private Long zipCode;
-
-    @Override
-    public String toString() {
-        return "Address{" +
-                "addressType :'" + addressType + '\'' +
-                "streetDetails :'" + streetDetails + '\'' +
-                ", houseNumber :'" + houseNumber + '\'' +
-                ", district :'" + district + '\'' +
-                ", city :'" + city + '\'' +
-                ", state :'" + state + '\'' +
-                ", country :'" + country + '\'' +
-                ", zipCode :'" + zipCode + '\'' +
-                '}';
-    }
 
 }
 

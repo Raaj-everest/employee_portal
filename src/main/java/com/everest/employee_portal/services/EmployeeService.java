@@ -26,7 +26,7 @@ public class EmployeeService {
     public Optional<Employee> getByID(Long id) {
         Optional<Employee> employee = employeeRepository.findById(id);
         if (employee.isEmpty()) {
-            throw new EmployeeNotFoundException();
+            throw new EmployeeNotFoundException("Employee with given "+id+" is not found");
         }
         return employee;
     }
@@ -34,13 +34,14 @@ public class EmployeeService {
     public Employee create(Employee employee) {
         addressRepository.save(employee.getPermanentAddress());
         addressRepository.save(employee.getPresentAddress());
-        return employeeRepository.save(employee);
+        employeeRepository.save(employee);
+        return employee;
     }
 
-    public Employee update(Employee employee, Long employeeId) {
-        Employee employee1 = employeeRepository.getById(employeeId);
+    public Employee update(Employee employee, Long id) {
+        Employee employee1 = employeeRepository.getById(id);
         if (employee1.id == null) {
-            throw new EmployeeNotFoundException();
+            throw new EmployeeNotFoundException("Employee with given "+id+" is not found");
         }
         Long permanentAddressId = employee1.getPermanentAddress().getId();
         Long presentAddressId = employee1.getPresentAddress().getId();
@@ -55,7 +56,7 @@ public class EmployeeService {
     public Employee delete(Long id) {
         Employee employee = employeeRepository.getById(id);
         if(employee.id==null){
-            throw new EmployeeNotFoundException();
+            throw new EmployeeNotFoundException("Employee with given "+id+" is not found");
         }
         addressRepository.delete(employee.getPermanentAddress());
         addressRepository.delete(employee.getPresentAddress());
@@ -63,7 +64,7 @@ public class EmployeeService {
         return employee;
     }
 
-    public List<Employee> searchEmployeeWith(String firstName, String lastName) {
+    public List<Employee> searchBy(String firstName, String lastName) {
         return employeeRepository.findByFirstNameAndLastName(firstName, lastName);
     }
 }

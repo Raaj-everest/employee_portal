@@ -15,40 +15,40 @@ import java.util.Optional;
 @RequestMapping("api/employees")
 public class EmployeeRestController {
 
-    private final EmployeeService es;
+    private final EmployeeService employeeService;
 
     @GetMapping("")
-    public ResponseEntity<List<Employee>> getEmployee() {
-        return ResponseEntity.status(HttpStatus.OK).body(es.getAll());
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Employee>> getByID(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(es.getByID(id));
+    public ResponseEntity<Optional<Employee>> getEmployeeByID(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.getByID(id));
     }
 
     @PostMapping("")
     public ResponseEntity<String> createEmployee(@RequestBody Employee employee) {
-        Employee employee1 = es.create(employee);
+        Employee employee1 = employeeService.create(employee);
         return ResponseEntity.status(HttpStatus.CREATED).body("Employee Created with id :" + employee1.id + " successfully");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
-        Employee employee1 = es.update(employee, id);
+        Employee employee1 = employeeService.update(employee, id);
         return ResponseEntity.status(HttpStatus.OK).body("Employee with id :" + employee1.id + " successfully");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
-        Employee employee1 = es.delete(id);
+        Employee employee1 = employeeService.delete(id);
         return ResponseEntity.status(HttpStatus.OK).body("Employee with id :" + employee1.id + " successfully");
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Employee>> getEmployeesWith(@RequestParam String firstName,
+    public ResponseEntity<List<Employee>> searchEmployeesBy(@RequestParam String firstName,
                                                            @RequestParam String lastName) {
-        return ResponseEntity.status(HttpStatus.OK).body(es.searchEmployeeWith(firstName, lastName));
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.searchBy(firstName, lastName));
     }
 
 
