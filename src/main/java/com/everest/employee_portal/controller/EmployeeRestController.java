@@ -26,19 +26,26 @@ public class EmployeeRestController {
     }
 
     @PostMapping("")
-    public Long createEmployee( @RequestBody Employee employee){
-       return  es.create(employee);
+    public Long createEmployee(@RequestBody Employee employee) {
+        return es.create(employee);
     }
 
     @PutMapping("/{id}")
-    public Long updateEmployee( @PathVariable Long id,@RequestBody Employee employee){
-        employee.setId(id);
-        return  es.update(employee);
+    public Long updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+        return es.update(employee,id);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteEmployee(@PathVariable Long id){
+    public String deleteEmployee(@PathVariable Long id) {
         return es.delete(id);
+    }
+
+    @GetMapping("/search")
+    public List<Employee> getEmployeesWith(@RequestParam String firstName,
+                                               @RequestParam String lastName,
+                                               @RequestParam String dateOfJoin){
+        System.out.println(dateOfJoin + "  in getEmployee");
+        return es.searchEmployeeWith(firstName,lastName,dateOfJoin);
     }
 
 

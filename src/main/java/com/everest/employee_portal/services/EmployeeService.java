@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,8 +34,8 @@ public class EmployeeService {
         return createdEmployee.getId();
     }
 
-    public Long update(Employee employee) {
-        Employee employee1 = employeeRepository.getById(employee.id);
+    public Long update(Employee employee,Long employeeId) {
+        Employee employee1 = employeeRepository.getById(employeeId);
         Long permanentAddressId = employee1.getPermanentAddress().getId();
         Long presentAddressId = employee1.getPresentAddress().getId();
         employee.getPermanentAddress().setId(permanentAddressId);
@@ -51,5 +52,10 @@ public class EmployeeService {
         addressRepository.delete(employee.getPresentAddress());
         employeeRepository.delete(employee);
         return "Employee with " + id + "deleted successfully";
+    }
+
+    public List<Employee> searchEmployeeWith(String firstName, String lastName, String dateOfJoin) {
+        System.out.println(dateOfJoin + " in service class");
+       return employeeRepository.findByFirstNameAndLastName(firstName,lastName);
     }
 }
