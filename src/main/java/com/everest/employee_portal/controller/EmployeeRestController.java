@@ -3,6 +3,8 @@ package com.everest.employee_portal.controller;
 import com.everest.employee_portal.entities.Employee;
 import com.everest.employee_portal.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,36 +18,37 @@ public class EmployeeRestController {
     private final EmployeeService es;
 
     @GetMapping("")
-    public List<Employee> getEmployee() {
-        return es.getAll();
+    public ResponseEntity<List<Employee>> getEmployee() {
+        return ResponseEntity.status(HttpStatus.OK).body(es.getAll());
     }
 
     @GetMapping("/{id}")
-    public Optional<Employee> getByID(@PathVariable Long id) {
-        return es.getByID(id);
+    public ResponseEntity<Optional<Employee>> getByID(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(es.getByID(id));
     }
 
     @PostMapping("")
-    public Long createEmployee(@RequestBody Employee employee) {
-        return es.create(employee);
+    public ResponseEntity<String> createEmployee(@RequestBody Employee employee) {
+        Employee employee1 = es.create(employee);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Employee Created with id :" + employee1.id + " successfully");
     }
 
     @PutMapping("/{id}")
-    public Long updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
-        return es.update(employee,id);
+    public ResponseEntity<String> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+        Employee employee1 = es.update(employee, id);
+        return ResponseEntity.status(HttpStatus.OK).body("Employee with id :" + employee1.id + " successfully");
     }
 
     @DeleteMapping("/{id}")
-    public String deleteEmployee(@PathVariable Long id) {
-        return es.delete(id);
+    public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
+        Employee employee1 = es.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Employee with id :" + employee1.id + " successfully");
     }
 
     @GetMapping("/search")
-    public List<Employee> getEmployeesWith(@RequestParam String firstName,
-                                               @RequestParam String lastName,
-                                               @RequestParam String dateOfJoin){
-        System.out.println(dateOfJoin + "  in getEmployee");
-        return es.searchEmployeeWith(firstName,lastName,dateOfJoin);
+    public ResponseEntity<List<Employee>> getEmployeesWith(@RequestParam String firstName,
+                                                           @RequestParam String lastName) {
+        return ResponseEntity.status(HttpStatus.OK).body(es.searchEmployeeWith(firstName, lastName));
     }
 
 
